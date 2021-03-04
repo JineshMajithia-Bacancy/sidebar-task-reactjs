@@ -11,7 +11,7 @@ const List = (props) => {
   } else {
     const display_list = props.list.map((element, index) => {
       return (
-        <div>
+        <div key={Math.random()}>
           <Table bordered>
             <tbody>
               <tr>
