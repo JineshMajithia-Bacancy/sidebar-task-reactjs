@@ -1,10 +1,10 @@
 import React from "react";
-import Home from "./components/home";
+import Sidebar from "./components/sidebar";
 
 export default function App() {
   return (
     <div>
-      <Home></Home>
+      <Sidebar />
     </div>
   );
 }
