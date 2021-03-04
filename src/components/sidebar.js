@@ -71,18 +71,6 @@ const SidebarComp = () => {
     document.getElementById("input_text").value = list[index].value;
   };
 
-  //   const toastify = (message) => {
-  //     toast.success(message, {
-  //       position: "top-right",
-  //       autoClose: 3000,
-  //       hideProgressBar: false,
-  //       closeOnClick: true,
-  //       pauseOnHover: true,
-  //       draggable: true,
-  //       progress: undefined,
-  //     });
-  //   };
-
   return (
     <div>
       <Sidebar
