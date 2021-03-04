@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import Sidebar from "react-sidebar";
 import { Button, InputGroup, Input } from "reactstrap";
+import { ToastContainer } from "react-toastify";
 import List from "./list";
+import { toastify } from "./toastify";
+import { confirm_alert } from "./confirmAlert";
 
 const SidebarComp = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -34,6 +37,7 @@ const SidebarComp = () => {
       document.getElementById("input_text").value = "";
       toggleSidebar();
       setIsAddDisabled(true);
+      toastify("Value added successfully!", "success");
     } else {
       let newList = [...list];
       newList[index] = {
@@ -45,13 +49,19 @@ const SidebarComp = () => {
       setIsEdit(false);
       document.getElementById("input_text").value = "";
       setIsAddDisabled(true);
+      toastify("Value edited successfully!", "edit");
     }
   };
 
-  const deleteValueHandler = (index) => {
-    let newList = [...list];
-    newList.splice(index, 1);
-    setList(newList);
+  const deleteValueHandler = async (index) => {
+    let result = await confirm_alert();
+    if (result) {
+      let newList = [...list];
+      newList.splice(index, 1);
+      setList(newList);
+      toastify("Value deleted successfully!", "delete");
+    } else {
+    }
   };
 
   const editValueHandler = (index) => {
@@ -60,6 +70,18 @@ const SidebarComp = () => {
     setIndex(index);
     document.getElementById("input_text").value = list[index].value;
   };
+
+  //   const toastify = (message) => {
+  //     toast.success(message, {
+  //       position: "top-right",
+  //       autoClose: 3000,
+  //       hideProgressBar: false,
+  //       closeOnClick: true,
+  //       pauseOnHover: true,
+  //       draggable: true,
+  //       progress: undefined,
+  //     });
+  //   };
 
   return (
     <div>
@@ -96,6 +118,7 @@ const SidebarComp = () => {
           editValueHandler={editValueHandler}
         />
       </Sidebar>
+      <ToastContainer />
     </div>
   );
 };
