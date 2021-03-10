@@ -11,34 +11,39 @@ const List = (props) => {
   } else {
     const display_list = props.list.map((element, index) => {
       return (
-        <div key={Math.random()}>
-          <Table bordered>
-            <tbody>
-              <tr>
-                <td>{element.key}</td>
-                <td>{element.value}</td>
-                <td>
-                  <Button
-                    color="danger"
-                    onClick={() => props.deleteValueHandler(index)}
-                  >
-                    Delete
-                  </Button>
-                  <Button
-                    color="primary"
-                    onClick={() => props.editValueHandler(index)}
-                  >
-                    Edit
-                  </Button>
-                </td>
-              </tr>
-            </tbody>
-          </Table>
-        </div>
+        <tr key={Math.random()}>
+          <td>{element.firstName}</td>
+          <td>{element.lastName}</td>
+          <td>
+            <Button
+              color="danger"
+              onClick={() => props.deleteValueHandler(index)}
+            >
+              Delete
+            </Button>
+            <Button
+              color="primary"
+              onClick={() => props.editValueHandler(index)}
+            >
+              Edit
+            </Button>
+          </td>
+        </tr>
       );
     });
 
-    return <div>{display_list}</div>;
+    return (
+      <Table bordered>
+        <tbody>
+          <tr>
+            <td>First Name</td>
+            <td>Last Name</td>
+            <td>Delete and Edit</td>
+          </tr>
+          {display_list}
+        </tbody>
+      </Table>
+    );
   }
 };
 

@@ -18,7 +18,10 @@ const SidebarComp = () => {
   };
 
   const onChangeHandler = () => {
-    if (document.getElementById("input_text").value !== "") {
+    if (
+      document.getElementById("firstName").value !== "" &&
+      document.getElementById("lastName").value !== ""
+    ) {
       setIsAddDisabled(false);
     } else {
       setIsAddDisabled(true);
@@ -31,10 +34,12 @@ const SidebarComp = () => {
         ...list,
         {
           key: Math.random().toString().substring(0, 10),
-          value: document.getElementById("input_text").value,
+          firstName: document.getElementById("firstName").value,
+          lastName: document.getElementById("lastName").value,
         },
       ]);
-      document.getElementById("input_text").value = "";
+      document.getElementById("firstName").value = "";
+      document.getElementById("lastName").value = "";
       toggleSidebar();
       setIsAddDisabled(true);
       toastify("Value added successfully!", "success");
@@ -42,12 +47,14 @@ const SidebarComp = () => {
       let newList = [...list];
       newList[index] = {
         key: list[index].key,
-        value: document.getElementById("input_text").value,
+        firstName: document.getElementById("firstName").value,
+        lastName: document.getElementById("lastName").value,
       };
       setList(newList);
       setIsSidebarOpen(false);
       setIsEdit(false);
-      document.getElementById("input_text").value = "";
+      document.getElementById("firstName").value = "";
+      document.getElementById("lastName").value = "";
       setIsAddDisabled(true);
       toastify("Value edited successfully!", "edit");
     }
@@ -68,7 +75,8 @@ const SidebarComp = () => {
     setIsSidebarOpen(true);
     setIsEdit(true);
     setIndex(index);
-    document.getElementById("input_text").value = list[index].value;
+    document.getElementById("firstName").value = list[index].firstName;
+    document.getElementById("lastName").value = list[index].lastName;
   };
 
   return (
@@ -79,8 +87,13 @@ const SidebarComp = () => {
             <InputGroup>
               <Input
                 onChange={() => onChangeHandler()}
-                id="input_text"
-                placeholder="Any Value"
+                id="firstName"
+                placeholder="First Name"
+              />
+              <Input
+                onChange={() => onChangeHandler()}
+                id="lastName"
+                placeholder="Last Name"
               />
             </InputGroup>
             <Button
@@ -98,7 +111,7 @@ const SidebarComp = () => {
         styles={{ sidebar: { background: "white" } }}
       >
         <Button outline color="primary" onClick={toggleSidebar}>
-          Open sidebar
+          Open sidebar to add data
         </Button>
         <List
           list={list}
